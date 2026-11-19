@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工廠 1F 模型 v28</title>
+<!-- 建立日期：2026-11-19。模型由 Blender 主檔 v28 唯讀匯出（隱藏圖層、量尺、參照線不帶），手機用手指轉／縮放／兩指平移。 -->
+<script type="module" src="model-viewer.min.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; background: #1e1f22; color: #eee; font-family: sans-serif; }
+  model-viewer { width: 100%; height: 100%; background: #2b2d31; }
+  #info { position: fixed; top: 0; left: 0; right: 0; padding: 8px 12px; font-size: 14px;
+          background: rgba(0,0,0,.55); line-height: 1.5; }
+  #bar { position: fixed; left: 0; right: 0; bottom: 18px; height: 6px; background: #444; }
+  #bar > div { height: 100%; width: 0; background: #4caf50; }
+</style>
+</head>
+<body>
+<model-viewer id="mv" src="factory_v28_nodraco.glb" camera-controls touch-action="none"
+  shadow-intensity="0.6" exposure="1.1" camera-orbit="200deg 50deg auto"
+  min-camera-orbit="auto auto 0.5m" max-camera-orbit="auto auto 60m"
+  interaction-prompt="none">
+</model-viewer>
+<div id="info">工廠 1F 模型 v28（2026-11-14 主檔）<br>單指：旋轉　兩指：縮放／平移　載入約 24MB，請稍等</div>
+<div id="bar"><div id="p"></div></div>
+<script>
+  const mv = document.getElementById('mv'), p = document.getElementById('p');
+  mv.addEventListener('progress', e => {
+    p.style.width = (e.detail.totalProgress * 100) + '%';
+    if (e.detail.totalProgress >= 1) setTimeout(() => { const b = document.getElementById('bar'); if (b) b.remove(); }, 500);
+  });
+  mv.addEventListener('load', () => { document.getElementById('info').lastChild.textContent = '單指：旋轉　兩指：縮放／平移'; });
+  mv.addEventListener('error', e => { document.getElementById('info').innerHTML += '<br><b style="color:#f66">模型載入失敗，請重新整理或換 Chrome 開</b>'; });
+</script>
+</body>
+</html>
